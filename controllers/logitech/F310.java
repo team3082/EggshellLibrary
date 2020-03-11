@@ -37,7 +37,7 @@ public class F310 {
         public boolean isAxis() {
             return true;
         }
-        
+
         public boolean isPOV() {
             return m_isPOV;
         }
@@ -63,7 +63,7 @@ public class F310 {
 
         int m_id;
         boolean m_isPOV;
-        
+
         Button(int id) {
             m_id = id;
         }
@@ -83,7 +83,7 @@ public class F310 {
         public boolean isAxis() {
             return false;
         }
-        
+
         public boolean isPOV() {
             return m_isPOV;
         }

@@ -1,12 +1,11 @@
 package frc.lib.controllers;
 
 import edu.wpi.first.wpilibj.Joystick;
-import frc.lib.RMath;
 
 public class Controller {
 
     private Joystick m_controller;
-    
+    private int m_lastPOV;
     public Controller(int id) {
         m_controller = new Joystick(id);
     }
@@ -18,18 +17,18 @@ public class Controller {
         if (hid.isButton()) {
             if(hid.isPOV())
                 return (m_controller.getPOV() == hid.getId()) ? 1 : 0;
-            return m_controller.getRawButton(hid.getId()) ? 1 : 0;        
+            return m_controller.getRawButton(hid.getId()) ? 1 : 0;
         }
 
         //direction of the id determines the direction of the axis
         if(hid.isPOV()) {
-            double dir = RMath.toRadians(m_controller.getPOV() - hid.getId());
+            double dir = Math.toRadians(m_controller.getPOV() - hid.getId());
             return Math.cos(dir);
         }
         return m_controller.getRawAxis(hid.getId());
     }
 
-    public double getRaw(IHID positive, IHID negative) {        
+    public double getRaw(IHID positive, IHID negative) {
         return getRaw(positive) - getRaw(negative);
     }
 
@@ -40,12 +39,12 @@ public class Controller {
         if (hid.isButton()) {
             if(hid.isPOV())
                 return m_controller.getPOV() == hid.getId();
-            return m_controller.getRawButton(hid.getId());        
+            return m_controller.getRawButton(hid.getId());
         }
 
         //direction of the id determines the direction of the axis
         if(hid.isPOV()) {
-            double dir = RMath.toRadians(m_controller.getPOV() - hid.getId());
+            double dir = m_controller.getPOV() - hid.getId() * Math.PI / 180.0;
             return Math.abs(Math.cos(dir)) > 0.05;
         }
         return Math.abs(m_controller.getRawAxis(hid.getId())) > 0.05;
@@ -56,7 +55,14 @@ public class Controller {
             return false;
 
         if (hid.isButton())
-            return m_controller.getRawButtonReleased(hid.getId());
+            if(hid.isPOV()) {
+                boolean released = m_lastPOV != m_controller.getPOV() && m_lastPOV == hid.getId();
+                // HACK
+                m_lastPOV = m_controller.getPOV(); // I dislike this but don't want to add a update function to Controller
+                return released; 
+            }
+            else
+                return m_controller.getRawButtonReleased(hid.getId());
 
         return false;
     }

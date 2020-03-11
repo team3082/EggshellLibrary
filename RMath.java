@@ -23,20 +23,6 @@ public class RMath {
 
 	}
 
-	//converts to degrees and forces to 0 to 360
-	public static double toDegrees(double radians) {
-		double degrees = (radians * (-180/Math.PI)) % 360;
-		if (degrees < 0)
-			degrees += 360;
-		return degrees;
-    }
-
-	//converts to radians and forces to -pi to pi
-	public static double toRadians(double degrees) {
-        double radians = (degrees * (Math.PI/-180)) % Math.PI;
-		return radians;
-	}
-
 	public static double averageAngles(double a, double b) {
 
 		// Force a and b to positive values from 0 to 360
@@ -78,7 +64,7 @@ public class RMath {
 			deg += 360;
 		return deg;
 	}
-	
+
 	public static double addAngles(double a, double b) {
 		double deg = (a + b) % 360;
 		if (deg < 0)
