@@ -2,42 +2,50 @@ package frc.lib;
 
 public class RT {
 
-	public static float m_time;
+	private static double SPT = .02; // SPT stands for seconds per tick
 
-    	public static double getTick () {
+	private static int m_tick;
 
-			return Math.round(m_time/.02);
+	public static void incrementTick () {
 
-      }
+		m_tick++;
 
-	public static double getTick (double time) {
+	}
 
-    		return (int) time / .02;
+	public static void resetTick () {
+
+		m_tick = 0;
+
+	}
+
+	public static double getTime () {
+
+		return m_tick * SPT;
 
       }
 
 	public static boolean isTime (double time) {
 
-		return getTick(time) == getTick(m_time);
+		return time == getTime();
 
       }
 
-      public static boolean isTime (double time, double range) {
+    public static boolean isTime (int time, int range) {
 
-		return time - range <= m_time && time + range >= m_time;
+		return time - range <= getTime() && time + range >= getTime();
 
 	}
 
 
       public static boolean isAfter (double time) {
 
-		return time > m_time;
+		return time > getTime();
 
       }
 
       public static boolean isBefore (double time) {
 
-		return time < m_time;
+		return time < getTime();
 
       }
 
