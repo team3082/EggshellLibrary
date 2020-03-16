@@ -46,7 +46,7 @@ public class RT {
 
     public static boolean isTime (int time, int range) {
 
-		return getTick(time) - getTick(range) <= m_tick && getTick(time) + getTick(range) >= m_tick;
+		return Math.abs(getTick(time) - m_tick) <= getTick(range);
 
 	}
 
