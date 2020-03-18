@@ -1,20 +1,19 @@
 package frc.lib.sensors;
 
 import edu.wpi.first.wpilibj.AnalogInput;
-import frc.robot.mapping.RobotMap;
-import frc.robot.constants.Constants;
 
+//https://www.maxbotix.com/documents/HRLV-MaxSonar-EZ_Datasheet.pdf
 public class Ultrasonic {
 
-    public static AnalogInput ultrasonic;
-    public static final double MetersPerVolt = Constants.kMilliMetersPerVolt;
+    private AnalogInput m_ultrasonic;
+    private final double kCentimetersPerVolt = 102.3541453428864;
 
-    public static void init() {
-        ultrasonic = new AnalogInput(RobotMap.kUltrasonicPort);
+    public Ultrasonic(int analogPort) {
+        m_ultrasonic = new AnalogInput(analogPort);
     }
 
-    public static double getDistance () {
-        return ultrasonic.getVoltage() * MetersPerVolt;
+    public double getDistance () {
+        return m_ultrasonic.getVoltage() * kCentimetersPerVolt;
     }
 
 }
