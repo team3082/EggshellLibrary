@@ -41,9 +41,9 @@ public class Limelight {
         targetArea = table.getEntry("ta");
         targetShortSidelength = table.getEntry("tshort");
         targetLongSidelength = table.getEntry("tlong");
-	  ledMode = table.getEntry("ledMode");
+        ledMode = table.getEntry("ledMode");
 
-	  setLedMode(false);
+        setLedMode(false);
     }
 
     public static boolean isTargetValid() {
