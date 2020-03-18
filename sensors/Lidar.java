@@ -2,37 +2,41 @@ package frc.lib.sensors;
 
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
-import frc.robot.mapping.RobotMap;
-import frc.robot.constants.Constants;
 
 public class Lidar {
 
-    public static Counter m_Lidar;
-    static final double kOffSet = Constants.kOffSet;
-    private static double m_lastAverage;
+    private Counter m_Lidar;
+    private double m_offset;
+    private double m_lastAverage;
 
-    public static void init() {
-        m_Lidar = new Counter(new DigitalInput(RobotMap.kLidarPort));
+    public Lidar(int dioPort) {
+        m_Lidar = new Counter(new DigitalInput(dioPort));
         m_Lidar.setMaxPeriod(1.00);
         m_Lidar.setSemiPeriodMode(true);
         m_Lidar.reset();
+
+        m_offset = 0;
     }
 
-    public static void update() {
+    public void setOffset(double offset) {
+        m_offset = offset;
+    }
+
+    public void update() {
         m_lastAverage = Math.round(m_lastAverage + getDistanceRaw()) / 2.0;
     }
 
     // Returns in centimeters smoothed
-    public static double getDistance() {
+    public double getDistance() {
         return m_lastAverage;
     }
 
     // Returns in centimeters
-    public static double getDistanceRaw() {
+    public double getDistanceRaw() {
         if (m_Lidar.get() < 1)
             return 0;
         else
-            return (m_Lidar.getPeriod() * 1000000.0 / 10.0) - kOffSet; //convert to distance. sensor is high 10 us for every centimeter.
+            return (m_Lidar.getPeriod() * 1000000.0 / 10.0) - m_offset; //convert to distance. sensor is high 10 us for every centimeter.
     }
 
 
