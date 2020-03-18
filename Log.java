@@ -25,16 +25,8 @@ public class Log {
     public static void println(String str) {
 		
         if (m_enabled) {
-			
-			if (str == null) {
-				
-				System.out.println("null"); 
-				
-			} else {
-			
-				System.out.println(str);
-			
-			}
+
+			System.out.println(str);
 			
 		}
 			
@@ -62,15 +54,7 @@ public class Log {
 		
         if (m_enabled) {
 			
-			if (str == null) {
-				
-				System.out.print("null"); 
-				
-			} else {
-			
-				System.out.print(str);
-			
-			}
+			System.out.print(str);
 			
 		}
 		
