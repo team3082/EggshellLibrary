@@ -18,6 +18,11 @@ public class Lidar {
         m_offset = 0;
     }
 
+    public Lidar(int dioPort, double offset) {
+        this(dioPort);
+        setOffset(offset);
+    }
+
     public void setOffset(double offset) {
         m_offset = offset;
     }
