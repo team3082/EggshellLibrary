@@ -9,7 +9,7 @@ public class StatAnalyzer {
 
     public static void PrintParsedData (Stat stat) {
 
-        ArrayList<Object> data = stat.getDataList();
+        ArrayList<Object> data = stat.getData ();
 
         for(int i=0; i < data.size(); i++){
 			
@@ -21,7 +21,7 @@ public class StatAnalyzer {
 
     public static void PrintParsedData (Stat stat, String title) {
 
-        ArrayList<Object> data = stat.getDataList();
+        ArrayList<Object> data = stat.getData();
 
         for(int i=0; i < data.size(); i++){
 			

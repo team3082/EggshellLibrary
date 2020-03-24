@@ -1,5 +1,9 @@
 package frc.lib;
 
+// imports 
+import java.util.ArrayList;
+
+
 public class Stat {
 
     private static boolean m_enabled = false;
@@ -8,15 +12,17 @@ public class Stat {
 
 	public final String m_title; 
 
-	public Stat () {
+	public Stat() {
 		
-		ls = new ArrayList<Object>();
+		m_ls = new ArrayList<Object>();
+
+		m_title = ""; 
 		
 	}
 
 	public Stat (String title) {
 
-		this(); // calls default constructor 
+		m_ls = new ArrayList<Object>();
 
 		m_title = title; 
 
@@ -43,16 +49,14 @@ public class Stat {
 		}
 		
 	}
-	
-	public void printfData () { // this would be run when the robot is disabled
 
-		title = ""; 
+	public void printfData () {
 
 		if (m_enabled) {
 
 			for(int i=0; i < m_ls.size(); i++){
 			
-            	System.out.println(title + " -- val: " + i + " is " + m_ls.get(i));
+            	System.out.println(m_title + " -- val: " + i + " is " + m_ls.get(i));
 			
 			}
 
@@ -62,13 +66,11 @@ public class Stat {
 
 	public void printfData (int skip) {
 
-		title = ""; 
-
 		if (m_enabled) {
 
 			for(int i=0; i < m_ls.size(); i+=skip){
 			
-            	System.out.println(title + " -- val: " + i + " is " + m_ls.get(i));
+            	System.out.println(m_title + " -- val: " + i + " is " + m_ls.get(i));
 			
 			}
 
@@ -93,6 +95,18 @@ public class Stat {
 	public int size () {
 
 		return m_ls.size(); 
+
+	}
+
+	public ArrayList<Object> getData() {
+
+		return m_ls; 
+
+	}
+
+	public Object get(int i) {
+
+		return m_ls.get(i); 
 
 	}
 
