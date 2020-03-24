@@ -90,5 +90,11 @@ public class Stat {
 		
 	}
 
+	public int size () {
+
+		return m_ls.size(); 
+
+	}
+
 
 }
